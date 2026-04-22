@@ -1,8 +1,33 @@
 package aod.lab2;
 
 import java.util.StringJoiner;
+/**
+ * A generic Binary Search Tree (BST) implementation.
+ *
+ * Stores elements in sorted tree structure where:
+ * <ul>
+ *   <li>values smaller than a node are placed in the left subtree</li>
+ *   <li>values greater than a node are placed in the right subtree</li>
+ * </ul>
+ *
+ * Duplicate values are ignored.
+ *
+ * Supports the following operations:
+ * <ul>
+ *   <li>add elements</li>
+ *   <li>search for elements</li>
+ *   <li>remove elements</li>
+ *   <li>clear the tree</li>
+ *   <li>return number of stored elements</li>
+ *   <li>return sorted string representation</li>
+ * </ul>
+ *
+ * Elements must implement {@link Comparable} so they can be ordered.
+ *
+ * @param <T> the type of elements stored in the tree
+ */
 
-public class BinarySearchTree<T extends Comparable<? super T>> {
+public class BinarySearchTree<T extends Comparable<? super T>> implements Tree<T>{
 
     private BSTNode root;
     private int size;
@@ -15,12 +40,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         this.size = 0;
     }
 
-    /**
-     * Adds a new item to the tree if it does not already exist.
-     *
-     * @param item the item to add
-     * @throws IllegalArgumentException if item is null
-     */
+   
     public void add(T item) {
         if (item == null) {
             throw new IllegalArgumentException("Item cannot be null");
@@ -61,12 +81,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         return current;
     }
 
-    /**
-     * Searches for an item in the tree.
-     *
-     * @param itemToSearchFor item to search for
-     * @return true if found, otherwise false
-     */
+    
     public boolean searchFor(T itemToSearchFor) {
         if (itemToSearchFor == null) {
             return false;
@@ -100,18 +115,12 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         return searchRecursive(current.right, target);
     }
 
-    /**
-     * Returns the number of items in the tree.
-     *
-     * @return tree size
-     */
+    
     public int size() {
         return size;
     }
 
-    /**
-     * Removes all items from the tree.
-     */
+   
     public void clear() {
         root = null;
         size = 0;
@@ -147,12 +156,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         buildInOrderString(current.right, joiner);
     }
 
-    /**
-     * Removes an item from the tree if it exists.
-     *
-     * @param itemToRemove item to remove
-     * @return true if removed, otherwise false
-     */
+    
     public boolean remove(T itemToRemove) {
         if (itemToRemove == null || !searchFor(itemToRemove)) {
             return false;
